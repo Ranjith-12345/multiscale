@@ -371,7 +371,7 @@ class DLA(nn.Module):
 
 
 
-def res2net_dla60(pretrained=None, **kwargs):
+def res2net_dla60(pretrained=True, **kwargs):
     Bottle2neck.expansion = 2
     model = DLA([1, 1, 1, 2, 3, 1],
                 [16, 32, 128, 256, 512, 1024],
@@ -380,7 +380,7 @@ def res2net_dla60(pretrained=None, **kwargs):
         model.load_state_dict(model_zoo.load_url(model_urls['res2net_dla60']))
     return model
 
-def res2next_dla60(pretrained=None, **kwargs):
+def res2next_dla60(pretrained=True, **kwargs):
     Bottle2neckX.expansion = 2
     model = DLA([1, 1, 1, 2, 3, 1],
                 [16, 32, 128, 256, 512, 1024],

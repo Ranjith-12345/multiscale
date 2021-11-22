@@ -33,7 +33,7 @@ class DETR(nn.Module):
         super().__init__()
         self.num_queries = num_queries
         self.transformer = transformer
-        hidden_dim = 512
+        hidden_dim = transformer.d_model
         self.class_embed = nn.Linear(hidden_dim, num_classes + 1)
         self.bbox_embed = MLP(hidden_dim, hidden_dim, 4, 3)
         self.query_embed = nn.Embedding(num_queries, hidden_dim)

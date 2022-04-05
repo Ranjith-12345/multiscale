@@ -157,7 +157,7 @@ class Res2Net(nn.Module):
         return x
 
 
-def res2net50(pretrained=False, **kwargs):
+def res2net50(pretrained=True, **kwargs):
     """Constructs a Res2Net-50 model.
     Res2Net-50 refers to the Res2Net-50_26w_4s.
     Args:

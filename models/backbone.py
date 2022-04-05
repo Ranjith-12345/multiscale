@@ -14,7 +14,7 @@ from typing import Dict, List
 from util.misc import NestedTensor, is_main_process
 
 from .position_encoding import build_position_encoding
-from .dla import res2net_dla60
+
 
 class FrozenBatchNorm2d(torch.nn.Module):
     """
@@ -86,7 +86,9 @@ class Backbone(BackboneBase):
                  train_backbone: bool,
                  return_interm_layers: bool,
                  dilation: bool):
-        backbone = res2net_dla60(pretrained=is_main_process())
+        backbone = getattr(torchvision.models, name)(
+            replace_stride_with_dilation=[False, False, dilation],
+            pretrained=is_main_process(), norm_layer=FrozenBatchNorm2d)
         num_channels = 512 if name in ('resnet18', 'resnet34') else 2048
         super().__init__(backbone, train_backbone, num_channels, return_interm_layers)
 
